@@ -21,7 +21,7 @@
 ## PASSWORD TO MYSQL
 As I tried to work within the web-terminal (ALX sandbox). I faced a problem of authorization. I couldn't access the mysql because the root password was set and I had no knowledge of it.
 The only solution was to reset it, and bellow are the steps to achieve that.
-1. STOP THE MYSQL SERVER
+1. STOP THE MYSQL SERVER<br>
 	To stop the mysql server write this command
 	```bash
 	sudo service mysql stop
@@ -30,7 +30,7 @@ The only solution was to reset it, and bellow are the steps to achieve that.
 	```bash
 	sudo systemctl stop mysql
 	```
-2. START MYSQL IN SAFE MODE
+2. START MYSQL IN SAFE MODE<br>
 	This is the command to start mysql in the safe mode
 	```bash
 	sudo mysqld_safe --skip-grant-tables &
@@ -40,14 +40,14 @@ The only solution was to reset it, and bellow are the steps to achieve that.
 	mysql -u root
 	```
 	Now you have access to run queries.
-4. UPDATE ROOT PASSWORD
+4. UPDATE ROOT PASSWORD<br>
 	Next we must update the password of the root, in order to prevent this problem from happening again.
 	```sql
 	FLUSH PRIVILEGES;
 	ALTER USER 'root'@'localhost' IDENTIFIED BY 'pswd';
 	```
 	From now on our root password will be **pswd**
-5. EXIT AND RESTART
+5. EXIT AND RESTART<br>
 	Exit from mysql by running exit.
 	```bash
 	exit
