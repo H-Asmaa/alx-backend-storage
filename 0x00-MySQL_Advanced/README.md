@@ -56,7 +56,7 @@ The only solution was to reset it, and bellow are the steps to achieve that.
 	```bash
 	sudo service mysql restart
 	```
-6. TESTING
+6. TESTING<br>
 	Test with a query.
 	```bash
 	echo "SHOW DATABASES" | mysql -uroot -p
