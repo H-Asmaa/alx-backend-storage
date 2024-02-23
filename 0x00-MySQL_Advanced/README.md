@@ -625,7 +625,7 @@ id  name    average_score
 In this task we are required to create an index `idx_name_first` on the table `names` and the first letter of `name`.
 You may wonder what are indexes? and why do we need to use them?
 
-> <mark>Indexes are data structures that allow efficient retrieval of data based on a column for example. Think of an index section of a book and how it provides quick reference to where an information is.
+> <mark>**Indexes** are data structures that allow efficient retrieval of data based on a column for example. Think of an index section of a book and how it provides quick reference to where an information is.
 We need the indexing because it helps retrieve data quickly and instead of spending time executing a query, indexes can be used as a reference...</mark>
 
 But as the task said, "Index is not the solution for any performance issue, but well used, it’s really powerful!".
