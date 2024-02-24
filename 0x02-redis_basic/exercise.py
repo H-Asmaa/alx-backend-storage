@@ -4,7 +4,7 @@
 """
 import redis
 import uuid
-from typing import Union
+from typing import Union, Any
 
 
 class Cache:
@@ -23,4 +23,11 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-
+    def get(self, key: str, fn: callable) -> Any:
+        """A method that take a key string argument and an optional
+        Callable argument named fn. This callable will be used to
+        convert the data back to the desired format."""
+        data = self._redis.get(key)
+        if fn and callable(fn):
+            data = fn(data)
+        return data
