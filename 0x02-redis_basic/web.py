@@ -11,7 +11,7 @@ def get_page(url: str) -> str:
     content of a particular URL and returns it."""
     redisInstance = redis.Redis()
     callsCount = redisInstance.get(f"count:{url}")
-    callsCount = int(callsCount) + 1 if callsCount else 1
+    callsCount = int(callsCount or 0) + 1
     response = requests.get(url)
     redisInstance.set(f"count:{url}", callsCount, ex=10)
 
