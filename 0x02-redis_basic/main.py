@@ -19,7 +19,7 @@ print(local_redis.get(key))
 
 # TASK 1
 
-cache2 = Cache()
+cache1 = Cache()
 
 TEST_CASES = {
     b"foo": None,
@@ -27,6 +27,21 @@ TEST_CASES = {
     "bar": lambda d: d.decode("utf-8")
 }
 
+local = redis.Redis()
 for value, fn in TEST_CASES.items():
-    key = cache2.store(value)
-    assert cache2.get(key, fn=fn) == value
+    key = cache1.store(value)
+    assert cache1.get(key, fn=fn) == value
+
+
+# TASK 2
+
+Cache = __import__('exercise').Cache
+
+cache2 = Cache()
+
+cache2.store(b"first")
+print(cache2.get(cache2.store.__qualname__))
+
+cache2.store(b"second")
+cache2.store(b"third")
+print(cache2.get(cache2.store.__qualname__))
