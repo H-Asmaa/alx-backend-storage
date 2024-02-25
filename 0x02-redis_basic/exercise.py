@@ -28,9 +28,8 @@ class Cache:
         Callable argument named fn. This callable will be used to
         convert the data back to the desired format."""
         data = self._redis.get(key)
-        if data:
-            if fn and Callable(fn):
-                data = fn(data)
+        if fn:
+            data = fn(data)
         return data
 
     def get_str(self, key: str) -> str:
