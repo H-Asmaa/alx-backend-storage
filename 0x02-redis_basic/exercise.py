@@ -23,7 +23,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable) -> Any:
+    def get(self, key: str, fn: Callable = None) -> Any:
         """A method that take a key string argument and an optional
         Callable argument named fn. This callable will be used to
         convert the data back to the desired format."""
