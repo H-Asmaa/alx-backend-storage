@@ -14,11 +14,6 @@ def get_page(url: str) -> str:
     callsCount = int(callsCount) + 1 if callsCount else 1
     response = requests.get(url)
     redisInstance.set(f"count:{url}", callsCount, ex=10)
-    (
-        print(f"The url: ({url}) was accessed {callsCount} time.")
-        if callsCount == 1
-        else print(f"The url: ({url}) was accessed {callsCount} times.")
-    )
 
 
 get_page("http://slowwly.robertomurray.co.uk")
