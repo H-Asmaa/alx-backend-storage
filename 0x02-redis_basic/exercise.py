@@ -15,12 +15,29 @@ def count_calls(method: Callable) -> Callable:
 
     @wraps(method)
     def incrCount(self, *args, **kwargs):
-        """A function that increments the count for the key
+        """A method that increments the count for the key
         every time it's called."""
         self._redis.incr(key)
         return method(self, *args, **kwargs)
 
     return incrCount
+
+
+def call_history(method: Callable) -> Callable:
+    """A decorator to store the history of inputs and outputs
+    for a particular function."""
+    input = method.__qualname__ + ":inputs"
+    output = method.__qualname__ + ":outputs"
+
+    @wraps(method)
+    def addInputOutput(self, *args):
+        """A method that appends the input and output arguments."""
+        self._redis.rpush(input, str(args))
+        temporary = method(self, *args)
+        self._redis.rpush(output, temporary)
+        return temporary
+
+    return addInputOutput
 
 
 class Cache:
@@ -33,6 +50,7 @@ class Cache:
         self.count = 0
 
     @count_calls
+    @call_history
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """A method that generates a random uuid key and
         stores the input data in Redis using the random key
