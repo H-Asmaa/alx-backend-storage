@@ -60,3 +60,16 @@ outputs = cache3._redis.lrange("{}:outputs".format(cache3.store.__qualname__), 0
 
 print("inputs: {}".format(inputs))
 print("outputs: {}".format(outputs))
+
+
+# TASK 4
+print("------------------------------")
+
+replay = __import__('exercise').replay
+
+cache4 = Cache()
+
+cache4.store("foo")
+cache4.store("bar")
+cache4.store(42)
+replay(cache4.store)
